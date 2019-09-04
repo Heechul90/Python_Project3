@@ -7,7 +7,7 @@ import seaborn as sns
 # 데이터 불러오기
 
 raw_data = pd.read_excel('Data/시군_시군구별 가해운전자 연령층별 교통사고.xls',
-                     encoding = 'euc-kr')
+                         encoding = 'euc-kr')
 raw_data
 raw_data.head()
 
@@ -27,8 +27,8 @@ for i in range(len(data)):
         data = data.drop(i)
 
 data
-data = data.drop(0)
 data = data.drop(745)
+
 
 data[data['시군구'].isin(['마산시', '창원시', '진해시'])]
 data['시군구'].unique()
@@ -37,18 +37,21 @@ data['시군구'][733] = '창원시'
 data['시군구'][734] = '창원시'
 data['시군구'][735] = '창원시'
 
-data.rename(columns = {'2014.8': '2014 65이상',
-                       '2014.9': '2014 70이상',
-                       '2015.8': '2015 65이상',
-                       '2015.9': '2015 70이상',
-                       '2016.8': '2016 65이상',
-                       '2016.9': '2016 70이상',
-                       '2017.8': '2017 65이상',
-                       '2017.9': '2017 70이상',
-                       '2018.8': '2018 65이상',
-                       '2018.9': '2018 70이상'},
+
+data.rename(columns = {'2014.8': '2014년',
+                       '2014.9': '2014년',
+                       '2015.8': '2015년',
+                       '2015.9': '2015년',
+                       '2016.8': '2016년',
+                       '2016.9': '2016년',
+                       '2017.8': '2017년',
+                       '2017.9': '2017년',
+                       '2018.8': '2018년',
+                       '2018.9': '2018년'},
             inplace = True)
 data
+
+
 
 data.to_csv('Data/도시별 노령운전자 교통사고.csv',
             index = False,
@@ -78,22 +81,33 @@ data1.to_csv('Data/도시별 노령운전자 교통사고2.csv',
 data2 = pd.read_csv('Data/도시별 노령운전자 교통사고2.csv',
                     index_col = 0,
                     encoding = 'euc-kr')
+
+del data2['도시']
+data2 = data2.set_index(['발생년도'])
+data2.index.names = ['발생년도']
+data2.head()
+data2.columns = [data2.columns.map(lambda x : x[:4]), data2.iloc[0]]
+data2 = data2.iloc[1:]
+data2.columns.names = ['년도', '연령']
 data2
 
-df = pd.DataFrame(columns=['idx', 'number'])
-Accident = pd.DataFrame(columns=['도시',
-                                 '2014_65_사고', '2014_65_사망', '2014_65_부상',
-                                 '2015_65_사고', '2015_65_사망', '2015_65_부상',
-                                 '2016_65_사고', '2016_65_사망', '2016_65_부상',
-                                 '2017_65_사고', '2017_65_사망', '2017_65_부상',
-                                 '2018_65_사고', '2018_65_사망', '2018_65_부상',
-                                 ])
 
-for i in range(len(data2)):
-    if data2['발생년도'][0] == '사고건수':
-        메메메메
-    if data2['발생년도'][1] == '사망지수':
-        메메메메
-    if data2['발생년도'][2] == '부상지수':
-        메메메메
+data2.to_csv('Data/도시별 노령운전자 교통사고3.csv',
+             encoding = 'euc-kr',
+             sep = ',')
+
+
+data2 = data2.set_axis([f"{x} {y}" for x, y in data2.columns], axis = 1, inplace = False)
+data2.columns
+data2
+
+data2.to_csv('Data/도시별 노령운전자 교통사고4.csv',
+             encoding = 'euc-kr',
+             sep = ',')
+
+data3 = pd.read_csv('Data/도시별 노령운전자 교통사고4.csv',
+                    encoding = 'euc-kr')
+
+
+data3[[:, 3:]]
 
