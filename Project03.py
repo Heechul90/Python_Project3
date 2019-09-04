@@ -6,9 +6,84 @@ import seaborn as sns
 
 # 데이터 불러오기
 
-Sido = pd.read_csv('Data1/시군구별 교통사고.csv',
-                   encoding = 'euc-kr')
-Sido
+raw_data = pd.read_excel('Data/시군_시군구별 가해운전자 연령층별 교통사고.xls',
+                     encoding = 'euc-kr')
+raw_data
+raw_data.head()
 
-plt.bar(Sido['시군구'], Sido['2014'])
-plt.show()
+data = raw_data.copy()
+data.head()
+data.columns
+
+data = data[['시도', '시군구', '발생년도', '2014.8', '2014.9',
+                                        '2015.8', '2015.9',
+                                        '2016.8', '2016.9',
+                                        '2017.8', '2017.9',
+                                        '2018.8', '2018.9',]]
+data
+
+for i in range(len(data)):
+    if data['시군구'][i] == '합계':
+        data = data.drop(i)
+
+data
+data = data.drop(0)
+data = data.drop(745)
+
+data[data['시군구'].isin(['마산시', '창원시', '진해시'])]
+data['시군구'].unique()
+data[data['시군구'].isin(['창원시(통합)'])]
+data['시군구'][733] = '창원시'
+data['시군구'][734] = '창원시'
+data['시군구'][735] = '창원시'
+
+data.rename(columns = {'2014.8': '2014 65이상',
+                       '2014.9': '2014 70이상',
+                       '2015.8': '2015 65이상',
+                       '2015.9': '2015 70이상',
+                       '2016.8': '2016 65이상',
+                       '2016.9': '2016 70이상',
+                       '2017.8': '2017 65이상',
+                       '2017.9': '2017 70이상',
+                       '2018.8': '2018 65이상',
+                       '2018.9': '2018 70이상'},
+            inplace = True)
+data
+
+data.to_csv('Data/도시별 노령운전자 교통사고.csv',
+            index = False,
+            encoding = 'euc-kr',
+            sep = ',')
+
+data1 = pd.read_csv('Data/도시별 노령운전자 교통사고.csv',
+                    encoding = 'euc-kr')
+data1.fillna(0)
+
+data1['도시'] = data1['시도'] + data1['시군구']
+data1
+
+del data1['시도']
+del data1['시군구']
+
+cols = data1.columns.tolist()
+cols = cols[-1:] + cols[:-1]
+cols
+data1 = data1[cols]
+data1
+
+data1.to_csv('Data/도시별 노령운전자 교통사고2.csv',
+             encoding = 'euc-kr',
+             sep = ',')
+
+data2 = pd.read_csv('Data/도시별 노령운전자 교통사고2.csv',
+                    index_col = 0,
+                    encoding = 'euc-kr')]
+data2
+
+Accident = pd.DataFrame
+Death = []
+
+for i in range(len(data2)):
+    if i % 2 =
+    
+        Accident.append(data2.loc[0])
