@@ -77,13 +77,23 @@ data1.to_csv('Data/도시별 노령운전자 교통사고2.csv',
 
 data2 = pd.read_csv('Data/도시별 노령운전자 교통사고2.csv',
                     index_col = 0,
-                    encoding = 'euc-kr')]
+                    encoding = 'euc-kr')
 data2
 
-Accident = pd.DataFrame
-Death = []
+df = pd.DataFrame(columns=['idx', 'number'])
+Accident = pd.DataFrame(columns=['도시',
+                                 '2014_65_사고', '2014_65_사망', '2014_65_부상',
+                                 '2015_65_사고', '2015_65_사망', '2015_65_부상',
+                                 '2016_65_사고', '2016_65_사망', '2016_65_부상',
+                                 '2017_65_사고', '2017_65_사망', '2017_65_부상',
+                                 '2018_65_사고', '2018_65_사망', '2018_65_부상',
+                                 ])
 
 for i in range(len(data2)):
-    if i % 2 =
-    
-        Accident.append(data2.loc[0])
+    if data2['발생년도'][0] == '사고건수':
+        메메메메
+    if data2['발생년도'][1] == '사망지수':
+        메메메메
+    if data2['발생년도'][2] == '부상지수':
+        메메메메
+
