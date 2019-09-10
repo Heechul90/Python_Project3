@@ -108,21 +108,7 @@ data2.to_csv('Data/도시별 노령운전자 교통사고4.csv',
 data3 = pd.read_csv('Data/도시별 노령운전자 교통사고4.csv',
                     encoding = 'euc-kr')
 
-data3.columns
+
+data3[[:, 3:]]
 
 
-for i in range(len(data3)):
-    data3['2014 65-70세'][i] = int(data3['2014 65-70세'][i])
-    data3['2014 65-70세'][i] = int(data3['2014 71세이상'][i])
-    data3['2015 65-70세'][i] = int(data3['2015 65-70세'][i])
-    data3['2015 65-70세'][i] = int(data3['2015 71세이상'][i])
-    data3['2016 65-70세'][i] = int(data3['2016 65-70세'][i])
-    data3['2016 65-70세'][i] = int(data3['2016 71세이상'][i])
-    data3['2017 65-70세'][i] = int(data3['2017 65-70세'][i])
-    data3['2017 65-70세'][i] = int(data3['2017 71세이상'][i])
-    data3['2018 65-70세'][i] = int(data3['2018 65-70세'][i])
-    data3['2018 65-70세'][i] = int(data3['2018 71세이상'][i])
-
-data3['2018 65-70세'][100]
-
-data3.groupby('발생년도').sum()
