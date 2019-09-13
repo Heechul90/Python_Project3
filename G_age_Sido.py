@@ -38,3 +38,5 @@ data.to_csv('Data1/시군구별 교통사고.csv',
             encoding = 'euc-kr',
             index = False,
             sep = ',')
+
+
