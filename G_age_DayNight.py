@@ -30,3 +30,4 @@ data.to_csv('Data1/주야별 교통사고.csv',
             encoding = 'euc-kr',
             index = False,
             sep = ',')
+
